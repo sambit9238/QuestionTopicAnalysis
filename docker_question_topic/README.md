@@ -1,5 +1,5 @@
 # question_topic_trec
-Sentiment Analysis using Textblob deployed through flask and docker.
+Question topic identification using Google's universal sentence encoder
 
 To run the docker of question topic identification to use it as a micro service for your application:
 	
@@ -16,6 +16,8 @@ To supply the input,
 		--url http://0.0.0.0:8888/predict_topic   
 		--header 'content-type:	application/json'   
 		--data '{"rawtext_list":["Where do you work now?", "What is your salary?"]}'
+		
+		
 The output,
 	{
   	"input": "['Where do you work now?', 'What is your salary?']",
