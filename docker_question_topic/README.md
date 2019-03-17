@@ -1,41 +1,37 @@
-# sentiment_analysis_textblob
+# question_topic_trec
 Sentiment Analysis using Textblob deployed through flask and docker.
 
-To run the docker of sentiment analyzer app:
+To run the docker of question topic identification to use it as a micro service for your application:
 	
 	#First change the docker file to take app.py as the application script
 	1. Come to this directory.
-	2. Build the docker image : docker build -t sentiment_analysis_textblob.
-	3. Run the container :   docker run -p 8888:5000 --name sentiment_analysis sentiment_analysis_textblob
+	2. Build the docker image : docker build -t question_topic .
+	3. Run the container :   docker run -p 8888:5000 --name question_topic question_topic
 
 	Now the docker is running on the port 8888 in localhost.
 
 
-To run the docker of sentiment analysis to use it as a micro service for your application:
-
-	#First change the docker file to take api_app.py as the application script
-	1. Come to this directory.
-	2. Build the docker image : docker build -t sentiment_analysis_textblob.
-	3. Run the container :   docker run -p 8888:5000 --name sentiment_analysis sentiment_analysis_textblob
-
-	Now the docker is running on the port 8888 in localhost.
-
-	To supply the input, 
-	curl --request POST   
-		 --url http://localhost:8888/analyse   
-		 --header 'content-type: application/json'   
-		 --data '{"rawtext":"Inoffensive and unremarkable."}'
-
-    The output:
-    	{
-  			"blob_sentiment": "0.5",
-			"blob_subjectivity": "0.75",
-			"final_time": "0.011960983276367188",
-			"number_of_tokens": "9",
-			"received_text": "The mother of such children would become very happy.",
-			"summary": "['mothers']"
-		}
-
+To supply the input, 
+	curl 	--request POST   
+		--url http://0.0.0.0:8888/predict_topic   
+		--header 'content-type:	application/json'   
+		--data '{"rawtext_list":["Where do you work now?", "What is your salary?"]}'
+The output,
+	{
+  	"input": "['Where do you work now?', 'What is your salary?']",
+  	"output": "[	{'ABBR': 0.0033528977, 
+				'DESC': 0.0013749895,
+				'ENTY': 0.0068545835,
+				'HUM': 0.7283039,
+				'LOC': 0.25804028,
+				'NUM': 0.0020733867}, 
+			{'ABBR': 0.0012655753, 
+				'DESC': 0.0079659065, 
+				'ENTY': 0.011016952, 
+				'HUM': 0.028764706, 
+				'LOC': 0.013653239, 
+				'NUM': 0.93733364}
+			]"
 
 
 
